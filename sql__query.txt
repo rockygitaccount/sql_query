@@ -1,0 +1,75 @@
+SELECT * FROM hr;
+use hr;
+create table hr;
+INSERT INTO hr (`Employee_ID`,`FIRST_NAME`,`LAST_NAME`,`EMAIL`,`PHONE_NUMBER`,
+`HIRE_DATE`,`JOB_ID`,`SALARY`,`COMISSION_PCT`,`MANAGER_ID`,`DEPARTMENT_ID`
+)values(106,'salman','khan','salman@gmail.com',21353465,
+'2016-02-12','AD_MP',50000,0,106,30);
+
+#adding +5000 to every employee
+select salary+5000 from hr;
+
+# WHERE clause
+select * from hr where salary>28000;
+select * from hr where salary<=28000;
+select * from hr where department_id =30;
+select * from hr where First_name ='Iron';
+
+# OPERATORS
+select * from hr where salary>28000 and last_name='king';
+select * from hr where salary>28000 or last_name='king';
+select * from hr where not First_name='king';
+# BETWEEN & IN operator
+select * from hr where salary between 20000 and 28000; 
+select * from hr where salary not between 20000 and 28000; 
+select * from hr where salary in(24000,28000);
+select * from hr where salary not in(24000,28000);
+
+# PATTERN matching operator (LIKE)
+select * from hr where First_name like 'i%';
+select * from hr where First_name like '%k';
+select * from hr where First_name like 'i%n';
+select * from hr where First_name like 'i%';
+select * from hr where First_name like '____';
+
+# Built in function (STRING)
+select upper(first_name) from hr;
+select lower(first_name) from hr;
+select length('rakesh');
+select trim('zz' from 'zzoraclezz') ;
+select INSTR('oracle','l');
+select substring('gloify',2,3);
+select concat(first_name,last_name) from hr;
+
+# DATE function
+select curdate();
+select current_date();
+select now() ;     #current date and time
+select sysdate();
+select month(2015-12-05);
+select * from hr where year(hire_date)="2019";
+select * from hr where month(hire_date)="6";
+
+# AVG, SUM, MIN, MAX, COUNT
+select avg(salary) from hr;
+select sum(salary) from hr;
+select 	min(salary) from hr;
+select max (salary) from hr;
+select count(*) from hr;
+
+#GROUP BY clause and HAVING
+select department_id, sum(salary) from hr order by department_id;
+select department_id,max(salary),min(salary) from hr order by department_id;
+select department_id, sum(salary) from hr group by department_id having sum(salary)>20000;
+select department_id,sum(salary) from hr where department_id<>60 group by department_id;
+select * from hr order by department_id desc;
+
+# Order of execution --all claus
+select department_id,sum(salary) from hr group by department_id having sum(salary)>25000 order by sum(salary);
+
+
+Show first name, last name, and gender of patients who's gender is 'M'
+SELECT first_name, last_name,gender
+FROM patients
+WHERE gender ="M";
+
